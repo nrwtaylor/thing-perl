@@ -489,6 +489,9 @@ sub doConsole {
     }
 
     if ( $agent eq ">" ) {
+	print "\n";
+	print $subject;
+
         my @lines = split /\|/, $response;
 
         if ( defined( $lines[0] ) ) {
