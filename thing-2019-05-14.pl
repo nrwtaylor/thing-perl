@@ -130,11 +130,7 @@ my $nom_to;
 # time
 my ( $s, $m, $h, $D, $M, $Y );
 
-print "foo";
-
-open( COM, "+<", $port ) || die "Could not start Thing. Serial port " . $port ." reporting an error: $!\n";
-
-print "bar";
+open( COM, "+<", $port ) || die "Cannot read serial port : $!\n";
 
 # Switch COM port to non-blocking operation.
 use Fcntl;
@@ -176,7 +172,7 @@ sub setup {
 }
 
 sub doLog {
-    print $_[0] . "\n";
+    #print $_[0] . "\n";
 }
 
 sub doStart {
@@ -220,17 +216,6 @@ sub doStart {
     doListen("OK");
 
     doNumber();
-
-    $agent = "start";
-    $response = "Test";
-    $nom_from = "7787920847";
-
-        $instruction = "add";
-
-        doBudget();
-
-
-    doMessage();
 
     # read state to read from eeprom.
     if ($state) {
@@ -1034,17 +1019,6 @@ sub doBar {
     doCron();
 
     $prior_agent = $agent;
-
-    # Check if ok
-
-    print COM "AT";
-    print COM "\x0D";
-    print COM "\x0A";
-
-    doListen("OK");
-
-
-
 
     doLog( "Set bar to " . $bar . ". " );
     if ( $agent eq "" ) { $agent = "bar"; }
